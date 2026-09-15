@@ -9,7 +9,6 @@ Marketing and support site for [WallyPaper](https://apps.apple.com/us/app/wallyp
 | `/` | `index.html` | Landing page (App Store Connect: Marketing URL) |
 | `/support` | `support.html` | FAQ and contact (App Store Connect: Support URL) |
 | `/privacy` | `privacy.html` | Privacy policy, verbatim from the previous Google Sites page (App Store Connect: Privacy Policy URL, `AppConstants.privacyPolicyURL`) |
-| `/terms` | `terms.html` | Terms of Use: Apple's Standard EULA plus the WallyPaper Pro subscription terms (App Store Connect: EULA / Terms link) |
 | `/404` | `404.html` | Not-found page |
 
 GitHub Pages serves `support.html` at `/support` (and `/support.html`), so the extensionless URLs above work as-is.
@@ -43,6 +42,6 @@ To regenerate images: screenshots come from the App Store listing (1284×2778 PN
 
 ## After it's live
 
-- App Store Connect → App Information: Privacy Policy URL `https://wallypaper.app/privacy`; Support URL `https://wallypaper.app/support`; Marketing URL `https://wallypaper.app`; Terms/EULA `https://wallypaper.app/terms`.
-- In the app, point `AppConstants.privacyPolicyURL` at `https://wallypaper.app/privacy` (and optionally `termsOfUseURL` at `/terms`) in the next build.
+- App Store Connect → App Information: Privacy Policy URL `https://wallypaper.app/privacy`; Support URL `https://wallypaper.app/support`; Marketing URL `https://wallypaper.app`. Terms of Use stay on Apple's Standard EULA (https://www.apple.com/legal/internet-services/itunes/dev/stdeula/), which the site's "Terms of Use" links point to.
+- In the app, point `AppConstants.privacyPolicyURL` at `https://wallypaper.app/privacy` in the next build.
 - Turn the Google Sites privacy page into an embed of `https://wallypaper.app/privacy`. The page hides its own header and footer when it detects it is inside an iframe, so only the policy shows.
