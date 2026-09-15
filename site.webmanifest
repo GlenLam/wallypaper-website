@@ -1,0 +1,13 @@
+{
+  "name": "WallyPaper",
+  "short_name": "WallyPaper",
+  "description": "Turn a photo of your kid or pet into a personalized iPhone wallpaper.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#171717",
+  "theme_color": "#171717",
+  "icons": [
+    { "src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
