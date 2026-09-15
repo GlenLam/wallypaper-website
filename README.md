@@ -24,9 +24,9 @@ GitHub Pages serves `support.html` at `/support` (and `/support.html`), so the e
 
 ## Updating
 
-Edit the HTML, commit to `main`, push. Pages redeploys in about a minute. Feature copy on the landing page follows the App Store description for the live build (1.0.1 as of September 2026); when a new version ships (sports cards, the "Made for" device picker, new fonts), update the Features, Templates and Names sections to match.
+Edit the HTML, commit to `main`, push. Pages redeploys in about a minute. Feature copy on the landing page follows the App Store description for the live build (1.0.1 as of September 2026); when a new version ships (sports cards, the "Made for" device picker, new fonts), update the Features and Names sections to match.
 
-To regenerate images: screenshots come from the App Store listing (1284×2778 PNG) resized to 720 wide and encoded with `cwebp -q 82`; the `feat-*.webp` images are the same screenshots with the top 30% (the caption) cropped off.
+To regenerate images: screenshots come from the App Store listing (1284×2778 PNG) resized to 720 wide and encoded with `cwebp -q 82`; the `feat-*.webp` images are crops of those screenshots (and of an editor screenshot for the Lock Screen tile).
 
 ## Deploying (one-time)
 
