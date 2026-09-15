@@ -241,6 +241,8 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .card .card-figure--lock { aspect-ratio: 1320 / 1680; min-height: 0; background: #171717; }
 .card .card-figure--widget { aspect-ratio: 820 / 1090; min-height: 0; background: #3f5a66; }
 .card-figure--crew img, .card-figure--lock img, .card-figure--widget img { object-position: center; }
+.card--split-rev { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); }
+.card--split-rev .card-figure { order: -1; }
 
 /* Emoji die-cut stickers */
 .stickers { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: auto; padding-top: 22px; }
@@ -437,7 +439,8 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
   .hero-visual { max-width: 440px; margin-top: 8px; }
   .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .span-2, .span-3, .span-4 { grid-column: span 3; }
-  .card--split { grid-template-columns: 1fr; }
+  .card--split, .card--split-rev { grid-template-columns: 1fr; }
+  .card--split-rev .card-figure { order: 0; }
   .card-figure { min-height: 220px; }
   .names-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .plans { grid-template-columns: 1fr; max-width: 30rem; }
