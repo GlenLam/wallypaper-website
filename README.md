@@ -27,11 +27,13 @@ Requires an iPhone running iOS 18 or later. Made by CaLa Studios LLC. Questions 
 | Path | File | Purpose |
 | --- | --- | --- |
 | `/` | `index.html` | Landing page |
+| `/how-to/` | `how-to/index.html` | Hub for the walkthroughs, one card per example |
+| `/how-to/baby-lock-screen-wallpaper` | `how-to/baby-lock-screen-wallpaper.html` | Walkthrough: a baby photo to a Lock Screen wallpaper (Benji) |
 | `/support` | `support.html` | FAQ and contact, linked from the App Store listing |
 | `/privacy` | `privacy.html` | Privacy policy, linked from the App Store listing and from inside the app |
 | `/404` | `404.html` | Not-found page |
 
-GitHub Pages serves `support.html` at `/support` (and `/support.html`), so the extensionless URLs above work as-is. Terms of Use link to Apple's [Standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/); there is no terms page here.
+GitHub Pages serves `support.html` at `/support` (and `/support.html`), and `how-to/baby-lock-screen-wallpaper.html` at `/how-to/baby-lock-screen-wallpaper`, so the extensionless URLs above work as-is. Terms of Use link to Apple's [Standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/); there is no terms page here.
 
 `privacy.html` adds an `embedded` class to `<html>` when it detects it is inside an iframe and hides its header and footer, so the policy alone can be embedded elsewhere.
 
@@ -40,6 +42,7 @@ GitHub Pages serves `support.html` at `/support` (and `/support.html`), so the e
 - `assets/css/site.css` – the one stylesheet, shared by every page. Dark only, to match the app.
 - `assets/js/site.js` – mobile nav, scroll reveal, footer year. No dependencies.
 - `assets/img/` – app icon sizes, App Store screenshots (WebP), the two framed mockups from the app, the wordmark SVG, Apple's App Store badge, the doodle background from the launch screen, and `og-image.jpg` for link previews.
+- `assets/img/how-to/<subject>/` – the images for one walkthrough: each at 640 wide and at its native width (for `srcset` and Google Images), plus a 1200×630 `og-*.jpg` for link previews.
 - `assets/fonts/` – Source Sans 3, Pacifico and Bebas Neue, subset to Latin and self-hosted as WOFF2 (SIL OFL, licenses alongside).
 - `sitemap.xml`, `robots.txt`, `site.webmanifest` – the usual metadata.
 - `CNAME` – `wallypaper.app`, so the custom domain survives redeploys.
@@ -52,3 +55,11 @@ Edit the HTML, commit to `main`, push. Pages redeploys in about a minute.
 Feature copy on the landing page follows the App Store description for the build that is live in the store, not what is in development. When a new version ships, update the Features, Backgrounds and Names sections to match it.
 
 To regenerate images: screenshots come from the App Store listing (1284×2778 PNG) resized to 720 wide and encoded with `cwebp -q 82`; the `feat-*.webp` images are crops of those screenshots (and of an editor screenshot for the Lock Screen tile).
+
+### Adding a walkthrough
+
+The how-to pages are what search engines should find for "how to make a [baby / dog / cat] Lock Screen wallpaper", so each one targets a single subject and a single search phrase.
+
+1. Copy `how-to/baby-lock-screen-wallpaper.html` to `how-to/<subject>-lock-screen-wallpaper.html` and rewrite the title, description, canonical, Open Graph tags, JSON-LD (`HowTo` steps and breadcrumbs), the headline, the four steps and the alt text. Keep the alt text specific to what is in each picture.
+2. Export the five images (the result, the original photo, the lift, the Name tab, the final "ta-da") and encode each twice with descriptive, keyword-bearing filenames: `cwebp -q 82 -resize 640 0 in.png -o <name>-640.webp` and `cwebp -q 82 in.png -o <name>-<nativewidth>.webp`, into `assets/img/how-to/<subject>/`. Make the `og-*.jpg` by cropping a 1200×630 band from the final image with `magick`. Put the real pixel sizes in the `width`/`height` attributes.
+3. Add a card to `how-to/index.html` (and an `ItemList` entry in its JSON-LD), and a `<url>` with `<image:image>` entries to `sitemap.xml`.

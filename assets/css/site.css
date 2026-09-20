@@ -72,7 +72,7 @@ a:hover { text-decoration: none; }
 p { margin: 0 0 1em; }
 h1, h2, h3, h4 { margin: 0; line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; text-wrap: balance; }
 ul, ol { margin: 0; padding: 0; }
-.steps-grid, .solids, .gradients, .themes, .shots, .plans, .pro-unlocks, .name-colors, .hero-meta, .nav-links, .footer-links, .doc-toc { list-style: none; margin: 0; padding: 0; }
+.steps-grid, .solids, .gradients, .themes, .shots, .plans, .pro-unlocks, .name-colors, .hero-meta, .nav-links, .footer-links, .doc-toc, .howto-steps, .howto-grid, .breadcrumbs ol { list-style: none; margin: 0; padding: 0; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 :focus-visible { outline: 3px solid var(--neon); outline-offset: 3px; border-radius: 6px; }
 ::selection { background: var(--neon); color: var(--neon-ink); }
@@ -207,6 +207,7 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .steps { background: var(--neon); color: var(--neon-ink); position: relative; overflow: hidden; }
 .steps .title { color: var(--neon-ink); }
 .steps .lede { color: var(--neon-ink-soft); font-weight: 400; }
+.steps .link-arrow { color: var(--neon-ink); }
 .steps-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: clamp(28px, 4vw, 48px) !important; }
 .step { position: relative; padding: 26px 22px 26px; border-radius: var(--radius); background: rgba(20, 20, 20, 0.06); border: 1px solid rgba(20, 20, 20, 0.12); }
 .step-num { font-family: var(--display); font-size: 3.4rem; line-height: 0.85; color: var(--neon-ink); opacity: 0.9; }
@@ -229,6 +230,7 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .span-2 { grid-column: span 2; }
 .span-3 { grid-column: span 3; }
 .span-4 { grid-column: span 4; }
+.span-6 { grid-column: span 6; }
 .card--split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 24px; align-items: stretch; }
 .card--split .card-body { align-self: center; }
 .card-figure { margin: 0; border-radius: 18px; overflow: hidden; background: var(--neon); min-height: 240px; position: relative; }
@@ -243,6 +245,17 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .card-figure--crew img, .card-figure--lock img, .card-figure--widget img { object-position: center; }
 .card--split-rev { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); }
 .card--split-rev .card-figure { order: -1; }
+
+/* Trading-card finishes, drawn in CSS with the app's card palettes */
+.card-fan { display: flex; justify-content: center; align-items: flex-end; gap: clamp(10px, 2vw, 22px); padding: 12px 0 4px; }
+.mini-card-wrap { text-align: center; }
+.mini-card { width: clamp(96px, 11vw, 124px); aspect-ratio: 2.5 / 3.5; border-radius: 6px; padding: 7px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4); transform: rotate(var(--r, 0deg)); margin-inline: auto; }
+.mini-card-scene { flex: 1; border-radius: 3px; border: 2px solid var(--pin); background: var(--scene); }
+.mini-card-plate { display: block; text-align: center; font-family: var(--display); font-size: 1.05rem; letter-spacing: 0.05em; line-height: 1.5; border-radius: 3px; background: var(--plate); color: var(--ink); }
+.mini-card-name { display: block; margin-top: 16px; color: var(--muted); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.mini-card--classic { --pin: #26463E; --scene: linear-gradient(180deg, #C6D0BE, #536D63); --plate: #F7F4EB; --ink: #18382D; --r: -6deg; background: #F7F4EB; }
+.mini-card--gold { --pin: #E6C575; --scene: linear-gradient(180deg, #4E8975, #0D3029); --plate: #201C14; --ink: #FFF1C3; --r: 0deg; background: linear-gradient(135deg, #FFF0B8, #B17B26 25%, #FFE5A1 45%, #8E5C19 65%, #FFF3C7 85%, #C89E48); }
+.mini-card--throwback { --pin: #38382C; --scene: linear-gradient(180deg, #C72D20, #A81916); --plate: #81B8C1; --ink: #2A322A; --r: 6deg; background: #EBDCAB; border-radius: 2px; }
 
 /* Emoji die-cut stickers */
 .stickers { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: auto; padding-top: 22px; }
@@ -286,15 +299,19 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .mesh-linen { background: radial-gradient(at 0% 0%, #f7f1e8 0, transparent 60%), radial-gradient(at 50% 0%, #f3ece2 0, transparent 55%), radial-gradient(at 100% 0%, #eae8f1 0, transparent 60%), radial-gradient(at 0% 50%, #f1ebe1 0, transparent 55%), radial-gradient(at 100% 50%, #e4ecf3 0, transparent 55%), radial-gradient(at 0% 100%, #efe6d9 0, transparent 60%), radial-gradient(at 50% 100%, #f2ece3 0, transparent 55%), radial-gradient(at 100% 100%, #f8f3ea 0, transparent 60%), #f6f0e6; }
 
 /* ---------- Names & fonts ---------- */
-.names-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.names-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .name-tile {
   background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 26px 18px 18px; text-align: center; min-width: 0;
 }
 .name-tile .demo { font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1.15; color: #fff; margin-bottom: 10px; white-space: nowrap; overflow: hidden; }
 .name-tile .label { color: var(--dim); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-.font-rounded { font-family: ui-rounded, "SF Pro Rounded", "Nunito", "Arial Rounded MT Bold", var(--font); font-weight: 800; }
-.font-classic { font-family: -apple-system, "SF Pro", "Helvetica Neue", Inter, Arial, sans-serif; font-weight: 700; }
-.font-serif { font-family: ui-serif, "New York", Georgia, "Times New Roman", serif; font-weight: 700; }
+/* The app's six name styles, approximated: Modern is Bebas Neue and Cursive is Pacifico (both self-hosted here);
+   the others fall back to the closest system faces (Inter, EB Garamond, Caveat and FreeMono in the app). */
+.font-modern { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; font-size: clamp(2.4rem, 3.8vw, 3.2rem) !important; }
+.font-classic { font-family: Inter, -apple-system, "SF Pro", "Helvetica Neue", Arial, sans-serif; font-weight: 700; }
+.font-editorial { font-family: "EB Garamond", ui-serif, "New York", Georgia, "Times New Roman", serif; font-weight: 700; }
+.font-handwritten { font-family: Caveat, "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive; font-weight: 700; }
+.font-cursive { font-family: var(--script); font-weight: 400; }
 .font-mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-weight: 700; letter-spacing: -0.02em; }
 .style-plain { color: #ffe082; }
 .style-shadow { color: #fff; text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.6); }
@@ -425,6 +442,51 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .notfound { min-height: 60vh; display: grid; place-items: center; text-align: center; padding-block: var(--section); }
 .notfound .big { font-family: var(--display); font-size: clamp(6rem, 20vw, 12rem); line-height: 0.9; color: var(--neon); }
 
+/* ---------- How-to pages ---------- */
+.breadcrumbs { padding-top: 22px; font-size: 0.92rem; color: var(--dim); }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 6px; }
+.breadcrumbs li + li::before { content: "\203A"; margin-right: 6px; color: var(--dim); }
+.breadcrumbs a { color: var(--muted); }
+.breadcrumbs a:hover { color: var(--text); }
+.breadcrumbs [aria-current] { color: var(--text-soft); }
+
+.howto-hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(28px, 5vw, 64px); align-items: center; padding: clamp(28px, 5vw, 56px) 0 clamp(40px, 6vw, 72px); }
+.howto-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); font-weight: 800; letter-spacing: -0.025em; }
+.howto-hero .lede { max-width: 34rem; }
+
+.howto-figure { margin: 0; width: 100%; max-width: 340px; justify-self: center; }
+.howto-figure img { display: block; width: 100%; height: auto; border-radius: 24px; border: 1px solid var(--line); background: #000; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35); }
+.howto-figure figcaption { margin-top: 12px; color: var(--muted); font-size: 0.92rem; line-height: 1.45; text-align: center; }
+.howto-figure--hero { max-width: 380px; }
+.howto-figure--wide { max-width: 440px; }
+
+.howto-steps { padding-bottom: var(--section); }
+.howto-step { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; padding: clamp(36px, 5vw, 64px) 0; border-top: 1px solid var(--line); }
+.howto-step:nth-child(even) .howto-figure { order: -1; }
+.howto-copy { max-width: 34rem; }
+.howto-num { display: block; font-family: var(--display); font-size: 3.6rem; line-height: 0.85; color: var(--neon); margin-bottom: 14px; }
+.howto-copy h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+.howto-copy p { color: var(--text-soft); margin: 0 0 0.9em; font-size: 1.06rem; }
+.howto-copy p:last-child { margin-bottom: 0; }
+.howto-copy strong { color: var(--text); font-weight: 600; }
+.howto-copy a { color: var(--neon); text-decoration: underline; text-decoration-color: rgba(217, 224, 33, 0.4); text-underline-offset: 3px; }
+.howto-copy a:hover { text-decoration-color: var(--neon); }
+.howto-tip { border-left: 3px solid var(--neon); padding-left: 14px; color: var(--muted) !important; font-size: 0.98rem !important; }
+.howto-note { color: var(--muted); margin-top: 28px; max-width: 46rem; }
+.howto-note a { color: var(--neon); text-decoration: underline; text-decoration-color: rgba(217, 224, 33, 0.4); text-underline-offset: 3px; }
+
+.howto-list { padding-bottom: var(--section); }
+.howto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.howto-card { display: flex; flex-direction: column; height: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; color: inherit; text-decoration: none; transition: transform 0.15s ease, border-color 0.15s ease; }
+.howto-card:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+.howto-card figure { margin: 0; aspect-ratio: 4 / 3; background: #000; overflow: hidden; }
+.howto-card img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; display: block; }
+.howto-card-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 6px; }
+.howto-card-tag { color: var(--neon); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.howto-card h3 { font-size: 1.2rem; font-weight: 700; }
+.howto-card p { color: var(--muted); margin: 0; font-size: 0.98rem; }
+.pillars--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
@@ -439,12 +501,17 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
   .hero-visual { max-width: 440px; margin-top: 8px; }
   .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .span-2, .span-3, .span-4 { grid-column: span 3; }
+  .span-6 { grid-column: span 6; }
   .card--split, .card--split-rev { grid-template-columns: 1fr; }
   .card--split-rev .card-figure { order: 0; }
   .card-figure { min-height: 220px; }
   .names-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .howto-hero { grid-template-columns: 1fr; }
+  .howto-step { grid-template-columns: 1fr; }
+  .howto-step:nth-child(even) .howto-figure { order: 0; }
   .plans { grid-template-columns: 1fr; max-width: 30rem; }
   .pillars { grid-template-columns: 1fr; }
+  .pillars--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pro-unlocks { grid-template-columns: 1fr; }
   .support-grid { grid-template-columns: 1fr; }
   .contact-card { position: static; }
@@ -468,6 +535,9 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
   .names-grid { gap: 10px; }
   .name-tile { padding: 20px 12px 14px; }
   .name-tile .demo { font-size: 1.7rem; }
+  .font-modern { font-size: 2.2rem !important; }
+  .howto-figure, .howto-figure--hero, .howto-figure--wide { max-width: 100%; }
+  .pillars--4 { grid-template-columns: 1fr; }
   .solid { width: 38px; height: 38px; }
   .gradients { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; }
   .hero-cta { gap: 16px; }
