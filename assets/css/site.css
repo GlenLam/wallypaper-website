@@ -377,6 +377,8 @@ h2.title { font-size: clamp(2rem, 4.2vw, 3.1rem); font-weight: 800; letter-spaci
 .site-footer { border-top: 1px solid var(--line); padding: 44px 0 40px; color: var(--muted); font-size: 0.95rem; }
 .footer-grid { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
 .footer-brand p { margin: 12px 0 0; max-width: 26rem; color: var(--dim); }
+.footer-brand p a { text-decoration: underline; text-underline-offset: 3px; }
+.footer-brand p a:hover { color: var(--text); }
 .footer-links { display: flex; gap: 28px; flex-wrap: wrap; list-style: none; }
 .footer-links a { color: var(--muted); font-weight: 500; }
 .footer-links a:hover { color: var(--text); }
